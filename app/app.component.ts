@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-// constants for days, months and number of days in a month
 const day: string[] = [
 "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 ];
@@ -11,8 +10,6 @@ const months: string[] = [
 
 const days_in_month: number[] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-// this function is used to generate all the day values for a month
-// we pad the array with 0 for moving the start of month to correct day.
 function generateMonth(monthID) {
   var month = months[monthID];
   var firstDay = new Date(2016, monthID, 1);
@@ -30,14 +27,13 @@ function generateMonth(monthID) {
     month_days.unshift(0);
   }
   return month_days;
-}
+};
 
 function getCurrentMonth() {
   var today = new Date();
   return today.getMonth();
-}
+};
 
-// this function returns all the contents of localstorage in event data form
 function allStorage() {
   var values = [],
   keys = Object.keys(localStorage),
@@ -50,7 +46,7 @@ function allStorage() {
     values.push(event);
   }
   return values;
-}
+};
 
 
 @Component({
@@ -92,12 +88,11 @@ export class AppComponent {
     this.events = allStorage();
   }
 
-  // get the previous month data and show it
   monthprev(currentMonth)
   {
-    var prevMonth = currentMonth - 1);
+    var prevMonth = (currentMonth - 1);
 
-    if prevMonth < 0
+    if (prevMonth < 0)
     {
       prevMonth = 11;
     }
@@ -107,12 +102,11 @@ export class AppComponent {
     this.month_data = generateMonth(prevMonth);
   }
 
-  // get the next month data and show it.
   monthnext(currentMonth)
   {
     var nextMonth = currentMonth + 1;
 
-    if nextMonth > 11
+    if (nextMonth > 11)
     {
       nextMonth = 0;
     }
@@ -122,7 +116,6 @@ export class AppComponent {
     this.month_data = generateMonth(nextMonth);
   }
 
-  // this function handles creating, deleting events.
   getEvent(day, monthnum)
   {
     var key = day.toString() + "-" + months[monthnum].toString();
